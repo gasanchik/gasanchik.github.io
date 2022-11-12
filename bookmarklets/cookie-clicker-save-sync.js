@@ -17,7 +17,7 @@ document.body.appendChild(messageElement)
 
 function updateValues(spreadsheetId, range, valueInputOption, _values, callback) {
     let values = [
-      [1] = [
+      [
         // Cell values ...
       ],
       // Additional rows ...
