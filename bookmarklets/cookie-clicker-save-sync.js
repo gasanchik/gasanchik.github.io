@@ -5,9 +5,19 @@ javascript: (function () {
   })();
 */
 
+//Prob some very bad coding practises, have never done something like this before lol
+window.prompt("cookie-save-sync loaded in")
+
+
+messageElement = document.createElement('h1');
+messageElement.setAttribute("id", "cookie-sync-messages");
+messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
+//<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
+
+
 function updateValues(spreadsheetId, range, valueInputOption, _values, callback) {
     let values = [
-      [
+      [1] = [
         // Cell values ...
       ],
       // Additional rows ...
@@ -49,12 +59,3 @@ function updateValues(spreadsheetId, range, valueInputOption, _values, callback)
       return;
     }
   }
-
-//Prob some very bad coding practises, have never done something like this before lol
-window.prompt("cookie-save-sync loaded in")
-
-
-messageElement = document.createElement('h1');
-messageElement.setAttribute("id", "cookie-sync-messages");
-messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
-//<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
