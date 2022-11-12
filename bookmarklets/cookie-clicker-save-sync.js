@@ -6,11 +6,11 @@ javascript: (function () {
 */
 
 //Prob some very bad coding practises, have never done something like this before lol
-window.prompt("cookie-save-sync loaded in")
+window.alert("cookie-save-sync loaded in");
 
 messageElement = document.createElement('h1');
-messageElement.setAttribute("id", "cookie-sync-messages");
-messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>'
+//messageElement.setAttribute("id", "cookie-sync-messages");
+messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
 document.body.appendChild(messageElement)
 //<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
 
