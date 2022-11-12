@@ -51,7 +51,7 @@ function updateValues(spreadsheetId, range, valueInputOption, _values, callback)
   }
 
 //Prob some very bad coding practises, have never done something like this before lol
-window.prompt("cookie-save-sync loaded in", null)
+window.prompt("cookie-save-sync loaded in")
 
 
 messageElement = document.createElement('h1');
