@@ -1,7 +1,7 @@
 /*
 Use this code as a bookmarklet
 javascript: (function () {
-    Game.LoadMod('https://raw.githubusercontent.com/gasanchik/cookie-save-sync/main/main.js');
+    Game.LoadMod('https://gasanchik.github.io/bookmarklets/cookie-clicker-save-sync.js');
   })();
 */
 
@@ -53,10 +53,8 @@ function updateValues(spreadsheetId, range, valueInputOption, _values, callback)
 //Prob some very bad coding practises, have never done something like this before lol
 window.prompt("cookie-save-sync loaded in")
 
-/*
-console.log("cookie-save-sync loaded in")
+
 messageElement = document.createElement('h1');
 messageElement.setAttribute("id", "cookie-sync-messages");
-document.getElementById('cookie-sync-messages').innerHTML = '<ol><li>html data</li></ol>';
-<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
-*/
+messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
+//<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
