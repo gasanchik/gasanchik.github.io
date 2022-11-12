@@ -8,6 +8,10 @@ javascript: (function () {
 //Prob some very bad coding practises, have never done something like this before lol
 window.alert("cookie-save-sync loaded in");
 
+let style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.save-sync-text {color: white; font-family:Courier New}, .save-sync-div1 {background-color: black;margin: 25px 0 10px 0; border-style: double; border-width: 2px; border-color: #FF6699; padding: 25px; background-color: #FFFFFF;}; .save-sync-div2 {display: none, background-color: black; bottom: 0px; position: fixed; z-index: 999;};';
+
 messageElement = document.createElement('h1');
 //messageElement.setAttribute("id", "cookie-sync-messages");
 messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
@@ -59,3 +63,5 @@ function updateValues(spreadsheetId, range, valueInputOption, _values, callback)
       return;
     }
   }
+
+  
