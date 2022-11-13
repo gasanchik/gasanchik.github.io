@@ -24,15 +24,28 @@ let styleSheet = `
 }
 `
 //.save-sync-div2 {display: none, background-color: black; bottom: 0px; position: fixed; z-index: 999;}
-messageElement = document.createElement('h1');
+let container = document.createElement('div');
 //messageElement.setAttribute("id", "cookie-sync-messages");
-messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
-document.body.appendChild(messageElement)
+container.innerHTML = `<div 
+  style = "
+  background-color: black; 
+  color: white; 
+  font-family:Courier New,Courier,monospace; 
+  bottom: 0px; 
+  position: fixed;"
+
+  id = "save-sync-container"
+>
+Hello World!
+</h1>`;
+document.body.appendChild(container)
 //<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
 
 //Make an element
 function makeElement(parent, type, text) {
-
+  let element = document.createElement(type);
+  element.body.innerText = text
+  parent.appendChild(element)
 }
 
 // Appends CSS content to the head of the site
