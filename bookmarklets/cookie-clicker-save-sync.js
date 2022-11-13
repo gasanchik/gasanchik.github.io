@@ -8,15 +8,54 @@ javascript: (function () {
 //Prob some very bad coding practises, have never done something like this before lol
 window.alert("cookie-save-sync loaded in");
 
-let style = document.createElement('style');
-style.type = 'text/css';
-style.innerHTML = '.save-sync-text {color: white; font-family:Courier New}, .save-sync-div1 {background-color: black;margin: 25px 0 10px 0; border-style: double; border-width: 2px; border-color: #FF6699; padding: 25px; background-color: #FFFFFF;}; .save-sync-div2 {display: none, background-color: black; bottom: 0px; position: fixed; z-index: 999;};';
+let styleSheet = `
+.text {
+  color: white; 
+  font-family:Courier New
+}
 
+.div {
+  background-color: black;
+  margin: 25px 0 10px 0; 
+  border-style: double; 
+  border-width: 2px; 
+  border-color: #FFFFFF; 
+  padding: 25px; 
+}
+`
+//.save-sync-div2 {display: none, background-color: black; bottom: 0px; position: fixed; z-index: 999;}
 messageElement = document.createElement('h1');
 //messageElement.setAttribute("id", "cookie-sync-messages");
 messageElement.innerHTML = '<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>';
 document.body.appendChild(messageElement)
 //<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
+
+//Make an element
+function makeElement(parent, type, text) {
+
+}
+
+// Appends CSS content to the head of the site
+function appendStyleSheet(id, content) {
+  //if (!document.querySelector("#" + id)) {
+      var head = document.head || document.getElementsByTagName("head")[0];
+  //    console.log(head);
+      head.appendChild(createStyleElement(content));
+  //}
+}
+
+function createStyleElement(content) {
+  var style = document.createElement("style");
+  style.type = "text/css";
+  //style.id = id;
+
+  if (style.styleSheet) {
+      style.styleSheet.cssText = content;
+  } else {
+      style.appendChild(document.createTextNode(content));
+  }
+  return style;
+}
 
 
 function updateValues(spreadsheetId, range, valueInputOption, _values, callback) {
