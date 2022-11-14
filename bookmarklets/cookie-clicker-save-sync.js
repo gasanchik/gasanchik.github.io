@@ -37,12 +37,12 @@ container.style = `
   "
 `;
 container.className = 'save-sync-container'
-container.id = 'save-sync-container'
+//container.className = 'save-sync-container'
 
 appendStyleSheet('save-sync-container', styleSheet)
 
 let div1 = document.createElement('div');
-div1.id =  'ccss-div' 
+div1.className =  'ccss-div' 
 container.appendChild(div1)
 
 let test = makeElement(div1, 'p', 'hello')
