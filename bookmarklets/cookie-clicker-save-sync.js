@@ -10,12 +10,12 @@ window.alert("cookie-save-sync loaded in");
 
 let styleSheet = `
 
-p {
+ccss-p {
   color: white; 
   font-family:Courier New
 }
 
-div {
+ccss-div {
   background-color: black;
   margin: 25px 0 10px 0; 
   border-style: double; 
@@ -37,9 +37,12 @@ container.style = `
   "
 `;
 container.className = 'save-sync-container'
-appendStyleSheet(container, styleSheet)
+container.id = 'save-sync-container'
+
+appendStyleSheet('save-sync-container', styleSheet)
 
 let div1 = document.createElement('div');
+div1.id =  'ccss-div' 
 container.appendChild(div1)
 
 let test = makeElement(div1, 'p', 'hello')
@@ -47,17 +50,18 @@ let test = makeElement(div1, 'p', 'hello')
 //Make element
 function makeElement(parent, type, text) {
   let element = document.createElement(type);
+  element.className = 'ccss-' + type
   element.innerHTML = text
   parent.appendChild(element)
 }
 
 // Appends CSS content to the head of the site
-function appendStyleSheet(element, content) {
-  //if (!document.querySelector("#" + id)) {
-  //    var head = document.head || document.getElementsByTagName("head")[0];
-      //console.log(head);
-      element.appendChild(createStyleElement(id, content));
-  //}
+function appendStyleSheet(id, content) {
+  if (!document.querySelector("#" + id)) {
+    var head = document.head || document.getElementsByTagName("head")[0];
+    console.log(head);
+    element.appendChild(createStyleElement(id, content));
+  }
 }
 
 function createStyleElement(id, content) {
