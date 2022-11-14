@@ -37,7 +37,7 @@ container.style = `
   "
 `;
 container.className = 'save-sync-container'
-appendStyleSheet('save-sync-container', styleSheet)
+appendStyleSheet(container, styleSheet)
 
 let div1 = document.createElement('div');
 container.appendChild(div1)
@@ -52,12 +52,12 @@ function makeElement(parent, type, text) {
 }
 
 // Appends CSS content to the head of the site
-function appendStyleSheet(id, content) {
-  if (!document.querySelector("#" + id)) {
-      var head = document.head || document.getElementsByTagName("head")[0];
+function appendStyleSheet(element, content) {
+  //if (!document.querySelector("#" + id)) {
+  //    var head = document.head || document.getElementsByTagName("head")[0];
       //console.log(head);
-      head.appendChild(createStyleElement(id, content));
-  }
+      element.appendChild(createStyleElement(id, content));
+  //}
 }
 
 function createStyleElement(id, content) {
