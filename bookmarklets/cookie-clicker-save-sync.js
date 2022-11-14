@@ -9,12 +9,13 @@ javascript: (function () {
 window.alert("cookie-save-sync loaded in");
 
 let styleSheet = `
-.text {
+
+p {
   color: white; 
   font-family:Courier New
 }
 
-.div {
+div {
   background-color: black;
   margin: 25px 0 10px 0; 
   border-style: double; 
@@ -23,44 +24,52 @@ let styleSheet = `
   padding: 25px; 
 }
 `
-//.save-sync-div2 {display: none, background-color: black; bottom: 0px; position: fixed; z-index: 999;}
+
 let container = document.createElement('div');
-//messageElement.setAttribute("id", "cookie-sync-messages");
-container.innerHTML = `<div 
-  style = "
+container.style = ` 
   background-color: black; 
   color: white; 
   font-family:Courier New,Courier,monospace; 
-  bottom: 0px; 
+  bottom: 0px;
+  left: 0px;  
   position: fixed;"
+`;
+container.className = 'save-sync-container'
+appendStyleSheet('save-sync-container', styleSheet)
 
-  id = "save-sync-container"
->
-</p>Hello World!<p>
-</div>`;
-document.body.appendChild(container)
-//<h1 style="background-color: black; color: white; font-family:Courier New,Courier,monospace; bottom: 0px; position: fixed;">Hello World!</h1>
+let div1 = document.createElement('div');
+div1.style = ` 
+  background-color: black; 
+  color: white; 
+  font-family:Courier New,Courier,monospace; 
+  bottom: 0px;
+  left: 0px;  
+  position: fixed;"
+`;
+container.appendChild(div1)
 
-//Make an element
+let test = makeElement(div1, 'p', 'hello')
+
+//Make element
 function makeElement(parent, type, text) {
   let element = document.createElement(type);
-  element.body.innerText = text
+  element.innerHTML = text
   parent.appendChild(element)
 }
 
 // Appends CSS content to the head of the site
 function appendStyleSheet(id, content) {
-  //if (!document.querySelector("#" + id)) {
+  if (!document.querySelector("#" + id)) {
       var head = document.head || document.getElementsByTagName("head")[0];
-  //    console.log(head);
-      head.appendChild(createStyleElement(content));
-  //}
+      //console.log(head);
+      head.appendChild(createStyleElement(id, content));
+  }
 }
 
-function createStyleElement(content) {
+function createStyleElement(id, content) {
   var style = document.createElement("style");
   style.type = "text/css";
-  //style.id = id;
+  style.id = id;
 
   if (style.styleSheet) {
       style.styleSheet.cssText = content;
@@ -69,6 +78,7 @@ function createStyleElement(content) {
   }
   return style;
 }
+
 
 
 function updateValues(spreadsheetId, range, valueInputOption, _values, callback) {
