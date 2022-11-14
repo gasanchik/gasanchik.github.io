@@ -32,20 +32,14 @@ container.style = `
   font-family:Courier New,Courier,monospace; 
   bottom: 0px;
   left: 0px;  
-  position: fixed;"
+  position: fixed;
+  z-index: 999;
+  "
 `;
 container.className = 'save-sync-container'
 appendStyleSheet('save-sync-container', styleSheet)
 
 let div1 = document.createElement('div');
-div1.style = ` 
-  background-color: black; 
-  color: white; 
-  font-family:Courier New,Courier,monospace; 
-  bottom: 0px;
-  left: 0px;  
-  position: fixed;"
-`;
 container.appendChild(div1)
 
 let test = makeElement(div1, 'p', 'hello')
