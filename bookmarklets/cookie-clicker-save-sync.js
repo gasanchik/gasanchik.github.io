@@ -41,11 +41,11 @@ let styleSheet = `
   right: 0;
 }
 
-.ccss-button, .ccss-close-button {
+.ccss-button {
   border-style: ridge; 
   border-radius: 4px;
   border-width: 2px; 
-  background-color: transparent;
+  background-color: black;
 }
 
 .ccss-center {
@@ -54,6 +54,10 @@ let styleSheet = `
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.ccss-button:hover {
+  color: grey;
 }
 
 .ccss-close-button:hover {
@@ -69,7 +73,14 @@ let styleSheet = `
 }
 `
 
-let wrapper = document.getElementById("wrapper")
+let coreWrapper = document.getElementById("wrapper")
+let wrapper = document.createElement('div')
+coreWrapper.appendChild(wrapper)
+wrapper.style = `
+height: 100%;
+width: 100%;
+`
+//wrapper.id = "ccss-wrapper"
 /*
 let wrapper = makeElement(body, "div", "", {class : "ccss-wrapper", style : `
   position: fixed;
@@ -82,21 +93,26 @@ appendStyleSheet('ccss-wrapper', styleSheet)
 let menuDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-corner-bottom-left", id : "ccss-menu", style : `
   position: fixed;
   bottom: 0;
-  left: calc(calc(30% + 35px) + 4px);
-  z-index = 3;
+  left: calc(calc(30% + 37px));
 `
 })
+let openCloseButtonMenu = makeElement(wrapper, "button", ">", {class : "ccss-div ccss-p ccss-button", style : `
+  position: fixed;
+  bottom: 0;
+  left: calc(30% + 15px);
+  padding: 2px 5.5px;
+  transform: rotate(90deg);
+`})
 let test = makeElement(menuDiv, "p", "ggggfsdfg sadfgg", {class : "ccss-p"})
 
 let promptDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-center ccss-prompt", id : "ccss-prompt"})
 let promptText = makeElement(promptDiv, "p", "Hello", {class : "ccss-p" , id : "ccss-prompt-text"})
 let promptChoisesText = makeElement(promptDiv, "p", "Choises:143126 1n345 13613", {class : "ccss-p" , id : "ccss-prompt-text"})
 let promptInput = makeElement(promptDiv, "input", null, {class : "ccss-p ccss-div ccss-input" , id : "ccss-prompt-input", type : "text"})
-let promptCloseButton = makeElement(promptDiv, "button", 'X', {class : "ccss-corner-top-right ccss-close-button ccss-p", id : "ccss-prompt-close-button"})
+let promptCloseButton = makeElement(promptDiv, "button", 'X', {class : "ccss-corner-top-right ccss-close-button ccss-button ccss-p", id : "ccss-prompt-close-button"})
 let promptError = makeElement(promptDiv, "p", "Error!", {class : "ccss-p" ,id : "ccss-prompt-error", style : `color: red;`})
 
 //Make element
-//function makeElement(parent, className, id, text = "", type = "div", innerHTML, style) {
 function makeElement(parent, type = "div", innerHTML = "", attributes = "") {
   let element = document.createElement(type);
   //let elementHTML = "<"+type+" "+sideHTML+">"+innerHTML+"</"+type+">"
@@ -146,51 +162,16 @@ function createStyleElement(id, content) {
   return style;
 }
 
+//All buttons and their functions
+document.body.onclick = function(e) {
+  var clickedElement = window.event ? event.srcElement : e.target;
+  while (clickedElement != null) {
+      if (clickedElement.className
+          && (clickedElement.className).indexOf("ccss-button") != -1) {
 
-
-function updateValues(spreadsheetId, range, valueInputOption, _values, callback) {
-    let values = [
-      [
-        // Cell values ...
-      ],
-      // Additional rows ...
-    ];
-    values = _values;
-    const body = {
-      values: values,
-    };
-    try {
-      gapi.client.sheets.spreadsheets.values.update({
-        spreadsheetId: spreadsheetId,
-        range: range,
-        valueInputOption: valueInputOption,
-        resource: body,
-      }).then((response) => {
-        const result = response.result;
-        console.log(`${result.updatedCells} cells updated.`);
-        if (callback) callback(response);
-      });
-    } catch (err) {
-      document.getElementById('content').innerText = err.message;
-      return;
-    }
+          alert("Element with class was clicked");
+          return;
+      }
+      clickedElement = clickedElement.parentNode;
   }
-
-  function getValues(spreadsheetId, range, callback) {
-    try {
-      gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: spreadsheetId,
-        range: range,
-      }).then((response) => {
-        const result = response.result;
-        const numRows = result.values ? result.values.length : 0;
-        console.log(`${numRows} rows retrieved.`);
-        if (callback) callback(response);
-      });
-    } catch (err) {
-      document.getElementById('content').innerText = err.message;
-      return;
-    }
-  }
-
-  
+}
