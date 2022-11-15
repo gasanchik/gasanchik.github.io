@@ -9,58 +9,112 @@ javascript: (function () {
 window.alert("cookie-save-sync loaded in");
 
 let styleSheet = `
-
-ccss-p {
+.ccss-p {
   color: white; 
-  font-family:Courier New
+  font-family:Courier New;
+  font-size: 15;
+  line-height = 5px;
 }
 
-ccss-div {
+.ccss-div {
+  border-radius: 4px;
   background-color: black;
-  margin: 25px 0 10px 0; 
-  border-style: double; 
+  margin: 2px 2px; 
+  border-style: ridge; 
   border-width: 2px; 
   border-color: #FFFFFF; 
-  padding: 25px; 
+  padding: 1px 10px;
+}
+
+.ccss-corner-bottom-left {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.ccss-corner-top-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.ccss-button, .ccss-close-button {
+  border-style: ridge; 
+  border-width: 2px; 
+  background-color: transparent;
+}
+
+.ccss-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.ccss-close-button:hover {
+  color: red;
+}
+
+.ccss-prompt {
+  padding: 25px 25px; 
+}
+
+.ccss-input {
+  
 }
 `
 
-let container = document.createElement('div');
-container.style = ` 
-  background-color: black; 
-  color: white; 
-  font-family:Courier New,Courier,monospace; 
-  bottom: 0px;
-  left: 0px;  
-  position: fixed;
-  z-index: 999;
-  "
-`;
-container.className = 'save-sync-container'
-//container.className = 'save-sync-container'
+let body = document.getElementById("wrapper")
+let wrapper = makeElement(body, "div", "", {style : `position: fixed; z-index: 999; height: 100%; width: 100%;`, class : "ccss-wrapper"} )//document.createElement('div');
+appendStyleSheet('ccss-wrapper', styleSheet)
 
-appendStyleSheet('save-sync-container', styleSheet)
+let menuDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-corner-bottom-left", id : "ccss-menu"})
+let test = makeElement(wrapper, "p", "ggggfsdfg sadfgg", {class : "ccss-p"})
 
-let div1 = document.createElement('div');
-div1.className =  'ccss-div' 
-container.appendChild(div1)
-
-let test = makeElement(div1, 'p', 'hello')
+let promptDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-center ccss-prompt", id : "ccss-prompt"})
+let promptText = makeElement(promptDiv, "p", "Hello", {class : "ccss-p" , id : "ccss-prompt-text"})
+//let promptInput = makeElement(promptDiv, "ccss-p ccss-div ccss-input", null, null, "input", `
+//type = "text"
+//
+let promptInput = makeElement(promptDiv, "input", null, {class : "ccss-p ccss-div ccss-input" , id : "ccss-prompt-input", type : "text"})
+let promptCloseButton = makeElement(promptDiv, "button", 'X', {class : "ccss-corner-top-right ccss-close-button ccss-p", id : "ccss-prompt-close-button"})
+let promptError = makeElement(promptDiv, "p", "Error!", {class : "ccss-p" ,id : "ccss-prompt-error", style : `color: red;`})
 
 //Make element
-function makeElement(parent, type, text) {
+//function makeElement(parent, className, id, text = "", type = "div", innerHTML, style) {
+function makeElement(parent, type = "div", innerHTML = "", attributes = "") {
   let element = document.createElement(type);
-  element.className = 'ccss-' + type
-  element.innerHTML = text
+  //let elementHTML = "<"+type+" "+sideHTML+">"+innerHTML+"</"+type+">"
+  element.innerHTML = innerHTML
+  element.setattri = attributes
   parent.appendChild(element)
+  return element
+}
+
+Element.prototype.setAttributes = function (attrs) {
+  for (var idx in attrs) {
+      if ((idx === 'styles' || idx === 'style') && typeof attrs[idx] === 'object') {
+          for (var prop in attrs[idx]){this.style[prop] = attrs[idx][prop];}
+      } else if (idx === 'html') {
+          this.innerHTML = attrs[idx];
+      } else {
+          this.setAttribute(idx, attrs[idx]);
+      }
+  }
+};
+
+//custom prompt function
+function prompt(message, prompt, choises) {
+
 }
 
 // Appends CSS content to the head of the site
 function appendStyleSheet(id, content) {
   if (!document.querySelector("#" + id)) {
-    var head = document.head || document.getElementsByTagName("head")[0];
-    console.log(head);
-    element.appendChild(createStyleElement(id, content));
+      var head = document.head || document.getElementsByTagName("head")[0];
+      //console.log(head);
+      head.appendChild(createStyleElement(id, content));
   }
 }
 
