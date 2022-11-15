@@ -17,6 +17,7 @@ let styleSheet = `
 }
 
 .ccss-div {
+  position: relative;
   border-radius: 4px;
   background-color: black;
   margin: 2px 2px; 
@@ -24,6 +25,8 @@ let styleSheet = `
   border-width: 2px; 
   border-color: #FFFFFF; 
   padding: 1px 10px;
+  transform: translateZ(10px);
+  z-index: 999;
 }
 
 .ccss-corner-bottom-left {
@@ -40,6 +43,7 @@ let styleSheet = `
 
 .ccss-button, .ccss-close-button {
   border-style: ridge; 
+  border-radius: 4px;
   border-width: 2px; 
   background-color: transparent;
 }
@@ -65,18 +69,28 @@ let styleSheet = `
 }
 `
 
-let body = document.getElementById("wrapper")
-let wrapper = makeElement(body, "div", "", {style : `position: fixed; z-index: 999; height: 100%; width: 100%;`, class : "ccss-wrapper"} )//document.createElement('div');
+let wrapper = document.getElementById("wrapper")
+/*
+let wrapper = makeElement(body, "div", "", {class : "ccss-wrapper", style : `
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index:0;
+`} ) */
 appendStyleSheet('ccss-wrapper', styleSheet)
 
-let menuDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-corner-bottom-left", id : "ccss-menu"})
-let test = makeElement(wrapper, "p", "ggggfsdfg sadfgg", {class : "ccss-p"})
+let menuDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-corner-bottom-left", id : "ccss-menu", style : `
+  position: fixed;
+  bottom: 0;
+  left: calc(calc(30% + 35px) + 4px);
+  z-index = 3;
+`
+})
+let test = makeElement(menuDiv, "p", "ggggfsdfg sadfgg", {class : "ccss-p"})
 
 let promptDiv = makeElement(wrapper, "div", null, {class : "ccss-div ccss-center ccss-prompt", id : "ccss-prompt"})
 let promptText = makeElement(promptDiv, "p", "Hello", {class : "ccss-p" , id : "ccss-prompt-text"})
-//let promptInput = makeElement(promptDiv, "ccss-p ccss-div ccss-input", null, null, "input", `
-//type = "text"
-//
+let promptChoisesText = makeElement(promptDiv, "p", "Choises:143126 1n345 13613", {class : "ccss-p" , id : "ccss-prompt-text"})
 let promptInput = makeElement(promptDiv, "input", null, {class : "ccss-p ccss-div ccss-input" , id : "ccss-prompt-input", type : "text"})
 let promptCloseButton = makeElement(promptDiv, "button", 'X', {class : "ccss-corner-top-right ccss-close-button ccss-p", id : "ccss-prompt-close-button"})
 let promptError = makeElement(promptDiv, "p", "Error!", {class : "ccss-p" ,id : "ccss-prompt-error", style : `color: red;`})
@@ -87,22 +101,23 @@ function makeElement(parent, type = "div", innerHTML = "", attributes = "") {
   let element = document.createElement(type);
   //let elementHTML = "<"+type+" "+sideHTML+">"+innerHTML+"</"+type+">"
   element.innerHTML = innerHTML
-  element.setattri = attributes
+  setAttributes(element, attributes)
   parent.appendChild(element)
   return element
 }
 
-Element.prototype.setAttributes = function (attrs) {
+function setAttributes (element, attrs) {
   for (var idx in attrs) {
-      if ((idx === 'styles' || idx === 'style') && typeof attrs[idx] === 'object') {
-          for (var prop in attrs[idx]){this.style[prop] = attrs[idx][prop];}
-      } else if (idx === 'html') {
-          this.innerHTML = attrs[idx];
-      } else {
-          this.setAttribute(idx, attrs[idx]);
-      }
+      //if ((idx === 'styles' || idx === 'style') && typeof attrs[idx] === 'object') {
+      //  element.style = attrs
+          //for (var prop in attrs[idx]){this.style[prop] = attrs[idx][prop];}
+      //} else if (idx === 'html') {
+      //  element.innerHTML = attrs[idx];
+      //} else {
+        element.setAttribute(idx, attrs[idx])
+      //}
   }
-};
+}
 
 //custom prompt function
 function prompt(message, prompt, choises) {
